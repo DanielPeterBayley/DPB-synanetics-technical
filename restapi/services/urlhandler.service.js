@@ -11,35 +11,46 @@ module.exports = {
 		 *
 		 * @param {String} url - Domain
 		 */
-		wordcountget: {
+		getwc: {
 			rest: {
-				method: `GET`,
-				path: `/wc`
-			},
-			params: {
-				url: `string`
+				method: `GET`
 			},
 			/** @param {Context} ctx  */
 			async handler(ctx) {
-				const response = await fetch(`http://urldatacontainer:3000/api/urldata/wordcount?url=${ctx.params.url}`);
-				const fulljson = await response.json();
-				return {message:`SUCCESS`, data: fulljson};
+				return urlIter(ctx.params.url);
 			}
 		},
-		wordcountpost: {
+		postwc: {
 			rest: {
-				method: `POST`,
-				path: `/wc`
-			},
-			params: {
-				url: `string`
+				method: `POST`
 			},
 			/** @param {Context} ctx  */
 			async handler(ctx) {
-				const response = await fetch(`http://urldatacontainer:3000/api/urldata/wordcount?url=${ctx.params.url}`);
-				const fulljson = await response.json();
-				return {message:`SUCCESS`, data: fulljson};
+				return urlIter(ctx.params.url);
 			}
 		}
 	}
 };
+
+async function urlIter(urls){
+	let urlArr=urls;
+	let results={};
+	if (!Array.isArray(urls)){
+		urlArr=[urls];
+	}
+	for(let i=0; i< urlArr.length; i++){
+		if (typeof urlArr[i] === `string`){
+			const response = await fetch(`http://urldatacontainer:3000/api/urldata/wordcount?url=${urlArr[i]}`);
+			const fulljson = await response.json();
+			if (fulljson.message === "SUCCESS"){
+				results[urlArr[i]] = {bodyWcNoScripts: fulljson.htmlBodyWordCountNoScripts, fullHtmlDocWc: fulljson.fullHtmlDocWordCount};
+			} else {
+				results[urlArr[i]] = {error: fulljson.name, description: fulljson.message};
+			}
+		} else{
+			results[urlArr[i]] = `URL must be string not ${typeof urlArr[i]}`;
+		}
+	}
+	return results;
+}
+

@@ -11,8 +11,8 @@ module.exports = {
         routes: [{
             path: "/api",
             aliases: {
-                "GET urlwc": "urlhandler.wordcountget",
-                "POST urlwc": "urlhandler.wordcountpost"
+                "GET urlwc": "urlhandler.getwc",
+                "POST urlwc": "urlhandler.getwc"
             }
         }]
     }
