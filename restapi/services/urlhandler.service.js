@@ -6,11 +6,6 @@ module.exports = {
 	 * Actions
 	 */
 	actions: {
-		/**
-		 * Count words on a webpage
-		 *
-		 * @param {String} url - Domain
-		 */
 		getwc: {
 			rest: {
 				method: `GET`
@@ -48,7 +43,7 @@ async function urlIter(urls){
 				results[urlArr[i]] = {error: fulljson.name, description: fulljson.message};
 			}
 		} else{
-			results[urlArr[i]] = `URL must be string not ${typeof urlArr[i]}`;
+			results[urlArr[i]] = {error:`TypeError`, description: `URL must be a string not a ${typeof urlArr[i]}`};
 		}
 	}
 	return results;
