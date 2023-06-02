@@ -1,7 +1,7 @@
 {
-  "name": "urldata",
+  "name": "restapi",
   "version": "1.0.0",
-  "description": "Simple api for gathering data drom a given url",
+  "description": "Publically exposed rest api to call backend systems",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "moleculer-runner --hot services/*.js",
@@ -10,7 +10,6 @@
   "author": "Daniel Bayley",
   "license": "ISC",
   "dependencies": {
-    "jsdom": "^22.1.0",
     "moleculer": "^0.14.29",
     "moleculer-web": "^0.10.5"
   }
