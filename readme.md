@@ -86,7 +86,8 @@ On a successful request, the response will be a json object, formatted as below:
 
 
 #### GET
-You can make a GET request to the API passing a single URL as a parameter to the API
+You can make a GET request to the API passing a single URL as a parameter to the API.
+
 Request:
 ```
 http://localhost:3000/api/urlwc?url=http://testappcontainer:3001/five
@@ -101,6 +102,7 @@ Response:
 }
 ```
 Or you can make a GET request to the API passing in multiple URLs as parameters.
+
 Request:
 ```
 http://localhost:3000/api/urlwc?url=http://testappcontainer:3001/five&url=testappcontainer:3001/ten
@@ -121,6 +123,7 @@ Response:
 
 #### Post
 You can make a POST request to the API passing a single URL as a string in the request body.
+
 Request URL:
 ```
 http://localhost:3000/api/urlwc
@@ -141,6 +144,7 @@ Response:
 }
 ```
 Or you can make a POST request to the API passing in multiple URLs as an array in the request body.
+
 Request URL:
 ```
 http://localhost:3000/api/urlwc
