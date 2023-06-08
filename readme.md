@@ -148,7 +148,7 @@ http://localhost:3000/api/urlwc
 Request Body json:
 ```json
 {
-    "url": "http://testappcontainer:3001/five"
+    "url": ["http://testappcontainer:3001/five","testappcontainer:3001/six"]
 }
 ```
 Response:
