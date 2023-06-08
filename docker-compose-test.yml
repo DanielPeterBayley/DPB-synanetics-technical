@@ -1,4 +1,9 @@
 services:
+  testapp:
+    build: /testapp
+    container_name: testappcontainer
+    ports:
+      - 3001:3001
   urldata:
     build: ./urldata
     container_name: urldatacontainer
@@ -7,9 +12,4 @@ services:
     container_name: restapicontainer
     ports:
       - 3000:3000
-  testapp:
-    build: /testapp
-    container_name: testappcontainer
-    ports:
-      - 3001:3001
 

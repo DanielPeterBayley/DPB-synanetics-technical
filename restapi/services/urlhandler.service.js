@@ -37,13 +37,15 @@ async function urlIter(urls){
 		if (typeof urlArr[i] === `string`){
 			const response = await fetch(`http://urldatacontainer:3000/api/urldata/wordcount?url=${urlArr[i]}`);
 			const fulljson = await response.json();
-			if (fulljson.name === "Success"){
+			if (fulljson.name === `Success`){
 				results[urlArr[i]] = {bodyWcNoScripts: fulljson.htmlBodyWordCountNoScripts, fullHtmlDocWc: fulljson.fullHtmlDocWordCount};
+			} else if (fulljson.name === `AbortError`){ 
+				results[urlArr[i]] = {error: fulljson.name, message: `The target URL failed to respond within 5 seconds.`};
 			} else {
-				results[urlArr[i]] = {error: fulljson.name, description: fulljson.message};
+				results[urlArr[i]] = {error: fulljson.name, message: fulljson.message};
 			}
 		} else{
-			results[urlArr[i]] = {error:`TypeError`, description: `URL must be a string not a ${typeof urlArr[i]}`};
+			results[urlArr[i]] = {error:`TypeError`, message: `URL must be a string not a ${typeof urlArr[i]}`};
 		}
 	}
 	return results;

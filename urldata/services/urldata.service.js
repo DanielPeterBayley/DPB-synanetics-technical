@@ -27,8 +27,12 @@ module.exports = {
 				if (ctx.params.url.toUpperCase().indexOf("HTTP") !== 0) {
 					ctx.params.url = `http://${ctx.params.url}`;
 				}
+				const controller = new AbortController();
+				const timeout = setTimeout(() => {
+					controller.abort();
+				}, 5000);
 				//fetch full page, store html in string
-				const response = await fetch(ctx.params.url);
+				const response = await fetch(ctx.params.url, {signal: controller.signal});
 				//Check content type before continuing
 				const contentType = response.headers.get(`content-type`);
 				if (!contentType.includes(`text/html`)){
