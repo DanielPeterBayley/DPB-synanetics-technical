@@ -57,8 +57,7 @@ app.get('/five', (req, res) => {
   });
   app.get('/json', (req, res) => {
     const jsonResponse = {message: "Hi", data:{field1:"Apple",field2:"Pie"}};
-  
-    res.send(jsonResponse);
+      res.json(jsonResponse);
   });
   app.get('/*', (req, res) => {
     const htmlResponse = `

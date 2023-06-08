@@ -37,7 +37,7 @@ async function urlIter(urls){
 		if (typeof urlArr[i] === `string`){
 			const response = await fetch(`http://urldatacontainer:3000/api/urldata/wordcount?url=${urlArr[i]}`);
 			const fulljson = await response.json();
-			if (fulljson.message === "SUCCESS"){
+			if (fulljson.name === "Success"){
 				results[urlArr[i]] = {bodyWcNoScripts: fulljson.htmlBodyWordCountNoScripts, fullHtmlDocWc: fulljson.fullHtmlDocWordCount};
 			} else {
 				results[urlArr[i]] = {error: fulljson.name, description: fulljson.message};
