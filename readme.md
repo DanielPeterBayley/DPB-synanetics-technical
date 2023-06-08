@@ -41,6 +41,14 @@ docker compose up -d --build
 This will build the Docker image, and start two Docker containers in the background.
 The API will now be listening on port 3000 of the install machine. 
 
+Alternatively you can start the API in dev mode by running the following command:
+```
+docker compose --file docker-compose-dev.yml up -d --build
+```
+This will start an additional Docker container with a simple node.js app exposed on port 3001.
+This app has a few pages with known word counts, a path that returns a JSON instead of HTML, and a path that does not return anything.
+This app can be used to test the word count calculation of the API, as well as the error handling.
+
 ### Stop the API
 Open the Terminal/Command prompt, and navigate to the install directory.
 ```
@@ -51,3 +59,8 @@ Run the following command:
 docker compose down
 ```
 This will remove the running Docker containers, and their shared network.
+
+Alternatively if you started the app in dev mode run the following command:
+```
+docker compose --file docker-compose-dev.yml down
+```
