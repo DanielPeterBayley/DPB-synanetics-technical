@@ -124,7 +124,7 @@ Response:
 }
 ```
 
-#### Post
+#### POST
 ---
 You can make a POST request to the API passing a single URL as a string in the request body.
 
