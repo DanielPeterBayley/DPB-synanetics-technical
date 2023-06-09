@@ -5,16 +5,18 @@ A simple API for retrieving a word count from a given URL.
 
 ### Install Prerequisites
 #### Docker
+---
 Install docker following the instructions found here: https://docs.docker.com/engine/install/
 
 Check your installation by running the command:
 ```shell
 docker --version
 ```
-If this command does not return a version number, try restarting the Terminal/Command Prompt, if that does not work try restarting your computer.
+If this command does not return a version number, try restarting the command line interface, if that does not work try restarting your computer.
 If this still doesn't solve your issue, carefully reinstall following the steps found on the website.
 
 #### Docker Compose
+---
 Some distributions of docker do not install Docker Compose.
 
 Check your installation by running the command:
@@ -30,7 +32,7 @@ If this command does not return a version number, follow the instructions found 
 ## Usage
 
 ### Start the API
-Open the Terminal/Command prompt, and navigate to the install directory.
+On the command line interface, navigate to the install directory.
 ```shell
 cd /install/location/DPB-synanetics-technical
 ```
@@ -50,7 +52,7 @@ This app has a few pages with known word counts, a path that returns a JSON inst
 This app can be used to test the word count calculation of the API, as well as the error handling.
 
 ### Stop the API
-Open the Terminal/Command prompt, and navigate to the install directory.
+On the command line interface, navigate to the install directory.
 ```shell
 cd install/location/DPB-synanetics-technical
 ```
@@ -86,6 +88,7 @@ On a successful request, the response will be a json object, formatted as below:
 
 
 #### GET
+---
 You can make a GET request to the API passing a single URL as a parameter to the API.
 
 Request:
@@ -122,6 +125,7 @@ Response:
 ```
 
 #### Post
+---
 You can make a POST request to the API passing a single URL as a string in the request body.
 
 Request URL:
@@ -185,6 +189,7 @@ If an error occurs, that URL will return error, and message parameters, formatte
 ```
 Below are some specific examples, using HTTP POST.
 #### Type Error
+---
 If the input url is not a string, or a url in the input array is not a string, a type error will be thrown.
 
 Request Body json:
@@ -207,6 +212,7 @@ Response:
 }
 ```
 #### Content Type Error
+---
 If the input url does not return a content type of HTML, an error will be thrown.
 
 Request Body json:
@@ -225,6 +231,7 @@ Response:
 }
 ```
 #### Timeout/Abort Error
+---
 If the target URL does not provide a response within five seconds, the API will timeout to avoid waiting indefinitely.
 
 Request Body json:
@@ -244,6 +251,7 @@ Response:
 ```
 
 #### Fetch Errors
+---
 These errors occur when there is an issue fetching data from the target URL.
 
 Request Body json:
