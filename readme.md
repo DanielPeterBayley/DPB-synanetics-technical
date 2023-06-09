@@ -195,7 +195,7 @@ If the input url is not a string, or a url in the input array is not a string, a
 Request Body json:
 ```json
 {
-    "url": "url": [7,true]
+    "url": [7,true]
 }
 ```
 Response:
