@@ -82,7 +82,7 @@ On a successful request, the response will be a json object, formatted as below:
 }
 ```
 - bodyWcNoScripts: Is the word count of the text content in the body of a webpage, not including script generated content.
-- fullHtmlDocWc: Is the word cound of the raw HTML file.
+- fullHtmlDocWc: Is the word count of the raw HTML file.
 
 
 #### GET
@@ -165,6 +165,103 @@ Response:
     "testappcontainer:3001/six": {
         "bodyWcNoScripts": 6,
         "fullHtmlDocWc": 28
+    }
+}
+```
+### Error Handling
+The API is built to handle a number of error scenarios.
+If an error occurs, that URL will return error, and message parameters, formatted as below.
+```json
+{
+    "url1": {
+        "error": "Error Name 1",
+        "message": "Desc 1"
+    },
+    "url2": {
+        "error": "Error Name 2",
+        "message": "Desc 2"
+    }
+}
+```
+Below are some specific examples, using HTTP POST.
+#### Type Error
+If the input url is not a string, or a url in the input array is not a string, a type error will be thrown.
+
+Request Body json:
+```json
+{
+    "url": "url": [7,true]
+}
+```
+Response:
+```json
+{
+    "7": {
+        "error": "TypeError",
+        "message": "URL must be a string not a number"
+    },
+    "true": {
+        "error": "TypeError",
+        "message": "URL must be a string not a boolean"
+    }
+}
+```
+#### Content Type Error
+If the input url does not return a content type of HTML, an error will be thrown.
+
+Request Body json:
+```json
+{
+    "url": ["http://testappcontainer:3001/json"]
+}
+```
+Response:
+```json
+{
+    "http://testappcontainer:3001/json": {
+        "error": "ContentError",
+        "message": "The URL does not return a HTML document. It returns a contentType of: application/json; charset=utf-8"
+    }
+}
+```
+#### Timeout/Abort Error
+If the target URL does not provide a response within five seconds, the API will timeout to avoid waiting indefinitely.
+
+Request Body json:
+```json
+{
+    "url": ["http://testappcontainer:3001/empty"]
+}
+```
+Response:
+```json
+{
+    "http://testappcontainer:3001/empty": {
+        "error": "AbortError",
+        "message": "The target URL failed to respond within 5 seconds."
+    }
+}
+```
+
+#### Fetch Errors
+These errors occur when there is an issue fetching data from the target URL.
+
+Request Body json:
+```json
+{
+    "url": ["http://testappcontainer:3010", "https://www.notarealdomainichecked.com"]
+}
+```
+Response:
+```json
+{
+    "http://testappcontainer:3010": {
+        "error": "FetchError",
+        "message": "request to http://testappcontainer:3010/ failed, reason: connect ECONNREFUSED 172.20.0.3:3010"
+    },
+    "https://www.notarealdomainichecked.com": {
+        "error": "FetchError",
+        "message": "request to https://www.notarealdomainichecked.com/ failed, reason: getaddrinfo ENOTFOUND www.notarealdomainichecked.com"
     }
 }
 ```
